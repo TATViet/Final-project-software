@@ -47,11 +47,14 @@ router.post("/login", async function(req, res) {
     }
 });
 
-// Handling user logout 
-router.get("/logout", function (req, res) {
-    req.logout(function(err) {
-        if (err) { return next(err); }
-        res.redirect('/');
+
+// Route để đăng xuất
+router.get('/logout', (req, res) => {
+    req.logout((err) => { // Xóa thông tin đăng nhập
+        if (err) {
+            return next(err); // Nếu có lỗi xảy ra
+        }
+        res.redirect('/'); // Chuyển hướng đến trang đăng nhập sau khi logout
     });
 });
 
