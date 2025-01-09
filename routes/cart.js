@@ -2,6 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+      return next(); // Người dùng đã đăng nhập, cho phép truy cập
+  }
+  res.redirect('/login'); // Chuyển hướng đến trang đăng nhập
+}
+
 // Giả lập dữ liệu của cart (menu)
 let cart = [
   { id: 1, name: 'IPHONE 14', price: '18000000', Image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoY4f4CH7WZLG_3z7lGaManU8zi3tBuTEjYg&s' },
@@ -23,7 +30,7 @@ let cart = [
 ];
 
 // Showing cart page
-router.get("/cart", function (req, res) {
+router.get("/cart", checkAuthentication, function (req, res) {
   Product.find().then((products) => {
     let totalPrice = products.reduce((acc, item) => {
       return acc + (item.Product_price * item.Product_quantity);
@@ -32,14 +39,18 @@ router.get("/cart", function (req, res) {
   });
 });
 
+router.get("/chat", checkAuthentication, function (req, res) {
+  res.render("chat");
+});
+
 // Showing productDetails form
-router.get("/productDetails", function (req, res) {
+router.get("/productDetails", checkAuthentication, function (req, res) {
   Product.find().then((products) => {
     res.render("productDetails", { cart: cart, Product: products });
   });
 });
 // ad page
-router.get("/verysecret", function (req, res) {
+router.get("/verysecret", checkAuthentication, function (req, res) {
     Product.find().then((Product) => {
       res.render("verysecret", { cart: cart, Product: Product });
     });
@@ -91,7 +102,7 @@ router.get('/cart_customer/:id', async (req, res) => {
   });
   
   // Delete all items from customer's cart
-  router.get('/cart_customer_deletall', async (req, res) => {
+  router.get('/cart_customer_deletall', checkAuthentication, async (req, res) => {
     try {
       await Product.deleteMany({});
       console.log('All data in the product collection has been deleted.');
