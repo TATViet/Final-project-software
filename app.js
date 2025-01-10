@@ -35,7 +35,7 @@ app.use(helmet.hsts({
     preload: true // Cho phép preload vào HSTS
 })); //HSTS giúp bảo vệ người dùng khỏi các tấn công man-in-the-middle bằng cách đảm bảo rằng các yêu cầu luôn được gửi qua HTTPS.
 app.use(helmet.noSniff());// ngăn chặn trình duyệt xác định kiểu MIME  bảo vệ ứng dụng khỏi tấn công XSS
-
+app.use(helmet.frameguard({ action: 'deny' }));//ngăn trang web khác nhúng vào (clickjacking)
 // Sử dụng middleware cho tất cả các yêu cầu
 app.use(limiter);
 
