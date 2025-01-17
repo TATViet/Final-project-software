@@ -113,6 +113,36 @@
     footer{
         margin-top : 60px;
     }
+    
+
+     
+        .form-container {
+            display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid black;
+      width: 100%;
+      height: 5px;
+        }
+        .box {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 2px solid black;
+      position: relative;
+    }
+    .box:last-child {
+      border-right: none;
+    }
+    .button {
+      padding: 5px 48%;
+      background-color: #e6f0ff;
+      border-radius: 0px;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
     </style>
 </head>
 <body>
@@ -143,11 +173,38 @@
         </div>
     </nav>
 
+    <div class="form-container"> 
+<form class="box" action="/productDetails" method="get">
+ <button class="button">
+All 
+</button>
+ </form>
+
+<form class="box" action="/soda" method="get">
+ <button class="button">
+Soda
+ </button>
+ </form>
+
+<form class="box" action="/snack" method="get">
+ <button class="button">
+Snack
+ </button>
+ </form>
+
+ <form class="box" action="/fresh" method="get">
+ <button class="button">
+ Fresh
+ </button>
+ </form>
+ 
+ </div>
 
     <div class="container mt-5">
         <div class="row">
-
-            <% cart.forEach(item => { %>
+            
+        <% cart.forEach(item => { %>
+            
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <img src="<%= item.Image %>" class="card-img-top" alt="Another Product Image" width="342" height="453" 
