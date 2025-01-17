@@ -52,9 +52,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Thiết lập sự kiện socket
-app.get("/chat", function (req, res) {
-  res.render("chat");
-});
+
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('disconnect', () => {
