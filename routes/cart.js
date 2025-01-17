@@ -6,28 +6,35 @@ function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
       return next(); // Người dùng đã đăng nhập, cho phép truy cập
   }
+  console.log(`Unauthorized access attempt to ${req.originalUrl} by IP: ${req.ip}`);
   res.redirect('/login'); // Chuyển hướng đến trang đăng nhập
 }
 
 // Giả lập dữ liệu của cart (menu)
 let cart = [
-  { id: 1, name: 'IPHONE 14', price: '18000000', Image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoY4f4CH7WZLG_3z7lGaManU8zi3tBuTEjYg&s' },
-  { id: 2, name: 'Samsung Galaxy S24 Ultra', price: '27990000', Image: 'https://samcenter.vn/images/thumbs/0006347_samsung-galaxy-s24-ultra.jpeg' },
-  { id: 3, name: 'Galaxy Z Fold 6', price: '41990000', Image: 'https://samcenter.vn/images/thumbs/0007191_xam_550.png' },
-  { id: 4, name: 'Galaxy Z Flip 6', price: '26990000', Image: 'https://samcenter.vn/images/thumbs/0007200_xanh-blue_550.png' },
-  { id: 5, name: 'Galaxy Watch7 (Bluetooth)', price: '7990000', Image: 'https://samcenter.vn/images/thumbs/0007230_kem_550.png' },
-  { id: 6, name: 'Tecno Pova 6 Neo', price: '4100000', Image: 'https://cdn.kalvo.com/uploads/img/large/60203-tecno-pova-6-neo.jpg' },
-  { id: 7, name: 'Xiaomi Redmi 13', price: '4290000', Image: 'https://cdn.tgdd.vn/Products/Images/42/325800/redmi-13-pink-1.jpg' },
-  { id: 8, name: 'Xiaomi 14', price: '21490000', Image: 'https://cdn.tgdd.vn/Products/Images/42/298538/xiaomi-14-xanh-1.jpg' },
-  { id: 9, name: 'Xiaomi POCO M6', price: '21490000', Image: 'https://cdn.tgdd.vn/Products/Images/42/327343/xiaomi-poco-m6-purple-1-1.jpg' },
-  { id: 10, name: 'Vsmart Star 5', price: '1890000', Image: 'https://dienthoaihay.vn/images/products/2021/09/12/large/vsmart-star-5-den_1631431476.jpg.jpg' },
-  { id: 11, name: 'Nokia 220 4G', price: '990000', Image: 'https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-1.jpg' },
-  { id: 12, name: 'Nokia 110 4G Pro ', price: '720000', Image: 'https://cdn.tgdd.vn/Products/Images/42/311034/nokia-110-4g-pro-tim-1.jpg' },
-  { id: 13, name: 'Baseus Encok S12', price: '549000', Image: 'https://product.hstatic.net/1000152881/product/baseus_encok_s12_01_8240138f98b345c69ade9d1b6cfc33bf.jpg' },
-  { id: 14, name: 'AJAZZ AK40 Black Brown/Blue switch', price: '600000', Image: 'https://maytinhbinhduong.com/wp-content/uploads/2022/04/40386_ajazz_ak40_black__2_.jpg' },
-  { id: 15, name: 'iPad Gen 10', price: '8,800,000', Image: 'https://bizweb.dktcdn.net/thumb/1024x1024/100/471/129/products/1-64bb0a10-af3d-4366-ac0e-165c82f39ca6.png?v=1704515792673' },
-  { id: 16, name: 'aptop gaming Lenovo LOQ', price: '20690000', Image: 'https://product.hstatic.net/200000722513/product/loq_15irx9_ct1_03_e060c7219ed745ce83017d95799d960e_1024x1024.png' },
+  { id: 1, name: 'Coca Cola', price: '12000', Image: 'https://cdn.tgdd.vn/Products/Images/2443/87880/bhx/thung-24-lon-nuoc-ngot-coca-cola-320ml-202304131109287672.jpg', type: 'soda' },
+  { id: 2, name: 'Coca Cola zero', price: '15000', Image: 'https://img.websosanh.vn/v2/users/root_product/images/nuoc-giai-khat-cocacola-zero-3/lXCbMjJ-S8vX.jpg', type: 'soda' },
+  { id: 3, name: 'Pepsi', price: '12000', Image: 'https://thegioidouong.net/wp-content/uploads/2015/03/Pepsi-lon-cao-2.jpg', type: 'soda' },
+  { id: 4, name: 'Pepsi zero', price: '15000', Image: 'https://storage.googleapis.com/sc_pcm_product/prod/2024/3/27/56834-8934588662119.jpg', type: 'soda' },
+  { id: 5, name: 'Sprite', price: '10000', Image: 'https://i5.walmartimages.com/seo/Coca-Cola-Sprite-Soft-Drink-12-Oz-Can-24-PK_4b6c5e01-1e94-4abb-a41a-8ba23d2c65ab.0e9fe0c63f0259a5813b9d9686269dfc.jpeg', type: 'soda' },
+  { id: 6, name: '7 up', price: '11000', Image: 'https://product.hstatic.net/1000288770/product/nuoc_ngot_7_up_vi_chanh_lon_235ml_04dd0bd25acd41a2b267c7e5fee240fe_master.jpg', type: 'soda' },
+  { id: 7, name: 'Lays Sour Cream & Onion', price: '20000', Image: 'https://product.hstatic.net/200000261315/product/lay_onion_515b2ffb9f7549eea26323c358185d03_master.png', type: 'snack' },
+  { id: 8, name: 'Lays steak', price: '19000', Image: 'https://product.hstatic.net/200000352097/product/-khoai-tay-vi-than-bo-nuong-texas-lays-wavy-goi-56g-202309070944106614_ab65deea772b48319194f378acec4201_1024x1024.jpg', type: 'snack' },
+  { id: 9, name: 'Lays cheddar', price: '21000', Image: 'https://lanchi.vn/wp-content/uploads/2021/10/lays-95g-phomai.jpg', type: 'snack' },
+  { id: 10, name: 'Oishi spicy shrimp', price: '10000', Image: 'https://www.lottemart.vn/media/catalog/product/cache/0x0/8/9/8934803012255.jpg.webp', type: 'snack' },
+  { id: 11, name: 'Oishi fish crakers', price: '10000', Image: 'https://www.lottemart.vn/media/catalog/product/cache/0x0/8/9/8934803022810-1.jpg.webp', type: 'snack' },
+  { id: 12, name: 'Poca saute diced beef', price: '6000', Image: 'https://product.hstatic.net/200000495609/product/snack-poca-vi-bo-luc-lac-banh-keo-an-vat-imnuts-01_95be3c47eba4431ba8ec5c4b99278c5b_master.jpg', type: 'snack' },
+  { id: 13, name: 'Poca squid chili salt', price: '10000', Image: 'https://www.lottemart.vn/media/catalog/product/cache/0x0/8/9/8936079122256-1.jpg.webp', type: 'snack' },
+  { id: 14, name: 'Doritos', price: '54000', Image: 'https://thucphamplaza.com/wp-content/uploads/products_img/snack-doritos.jpg', type: 'snack' },
+  { id: 15, name: 'Noodles full topping', price: '30000', Image: 'https://www.circlek.com.vn/wp-content/uploads/2019/05/9.png', type: 'fresh' },
+  { id: 16, name: 'GREEN MILK TEA KIT', price: '17000', Image: 'https://www.circlek.com.vn/wp-content/uploads/2016/06/UPDATE_DRINKS_ThaiXanh.png', type: 'fresh' },
 ];
+// Showing productDetails form
+router.get("/productDetails", checkAuthentication, function (req, res) {
+  Product.find().then((products) => {
+    res.render("productDetails", { cart: cart, Product: products });
+  });
+});
 
 // Showing cart page
 router.get("/cart", checkAuthentication, function (req, res) {
@@ -39,14 +46,22 @@ router.get("/cart", checkAuthentication, function (req, res) {
   });
 });
 
-router.get("/chat", checkAuthentication, function (req, res) {
-  res.render("chat");
-});
+
 
 // Showing productDetails form
-router.get("/productDetails", checkAuthentication, function (req, res) {
+router.get("/soda", checkAuthentication, function (req, res) {
   Product.find().then((products) => {
-    res.render("productDetails", { cart: cart, Product: products });
+    res.render("soda", { cart: cart, Product: products });
+  });
+});
+router.get("/snack", checkAuthentication, function (req, res) {
+  Product.find().then((products) => {
+    res.render("snack", { cart: cart, Product: products });
+  });
+});
+router.get("/fresh", checkAuthentication, function (req, res) {
+  Product.find().then((products) => {
+    res.render("fresh", { cart: cart, Product: products });
   });
 });
 // ad page
