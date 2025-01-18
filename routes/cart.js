@@ -26,8 +26,8 @@ let cart = [
   { id: 12, name: 'Poca saute diced beef', price: '6000', Image: 'https://product.hstatic.net/200000495609/product/snack-poca-vi-bo-luc-lac-banh-keo-an-vat-imnuts-01_95be3c47eba4431ba8ec5c4b99278c5b_master.jpg', type: 'snack' },
   { id: 13, name: 'Poca squid chili salt', price: '10000', Image: 'https://www.lottemart.vn/media/catalog/product/cache/0x0/8/9/8936079122256-1.jpg.webp', type: 'snack' },
   { id: 14, name: 'Doritos', price: '54000', Image: 'https://thucphamplaza.com/wp-content/uploads/products_img/snack-doritos.jpg', type: 'snack' },
-  { id: 15, name: 'Noodles full topping', price: '30000', Image: 'https://www.circlek.com.vn/wp-content/uploads/2019/05/9.png', type: 'fresh' },
-  { id: 16, name: 'GREEN MILK TEA KIT', price: '17000', Image: 'https://www.circlek.com.vn/wp-content/uploads/2016/06/UPDATE_DRINKS_ThaiXanh.png', type: 'fresh' },
+  { id: 15, name: 'Noodles full topping', price: '30000', Image: 'https://www.circlek.com.vn/wp-content/uploads/2019/05/9.png', type: 'Prepared Products' },
+  { id: 16, name: 'GREEN MILK TEA KIT', price: '17000', Image: 'https://www.circlek.com.vn/wp-content/uploads/2016/06/UPDATE_DRINKS_ThaiXanh.png', type: 'Prepared Products' },
 ];
 // Showing productDetails form
 router.get("/productDetails", checkAuthentication, function (req, res) {
